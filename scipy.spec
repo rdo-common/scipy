@@ -3,7 +3,7 @@
 Summary: Scipy: array processing for numbers, strings, records, and objects
 Name: scipy
 Version: 0.5.2
-Release: 2%{?dist}
+Release: 2.1%{?dist}
 
 Group: Development/Libraries
 License: BSD
@@ -37,7 +37,7 @@ basic linear algebra and random number generation.
 %setup -q
 
 %build
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu95 --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu --noarch build
 
 #env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu --f77flags="$RPM_OPT_FLAGS" build
 
@@ -58,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Apr 14 2007 Jef Spaleta <jspaleta@gmail.com> - 0.5.2-2.1
+- minor correction for f77 usage
+
 * Sat Apr 14 2007 Jef Spaleta <jspaleta@gmail.com> - 0.5.2-2
 - revert to f77 due to issue with numpy in development
 
