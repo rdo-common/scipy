@@ -3,7 +3,7 @@
 Summary: Scipy: array processing for numbers, strings, records, and objects
 Name: scipy
 Version: 0.5.2
-Release: 2.1%{?dist}
+Release: 2.2%{?dist}
 
 Group: Development/Libraries
 License: BSD
@@ -14,10 +14,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel 
 BuildRequires: fftw-devel, blas-devel, lapack-devel
-#BuildRequires: gcc-gfortran
-# numpy is not correctly detecting gfortran in development tree
-# reverting to f77 for the time being in devel
-BuildRequires: compat-gcc-34-g77
+BuildRequires: gcc-gfortran
 Requires: numpy, python
 
 
@@ -37,9 +34,8 @@ basic linear algebra and random number generation.
 %setup -q
 
 %build
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu95 --noarch build
 
-#env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu --f77flags="$RPM_OPT_FLAGS" build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -58,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr 18 2007 Jef Spaleta <jspaleta@gmail.com> - 0.5.2-2.2
+- go back to using gfortran now that numpy is patched
+
 * Sat Apr 14 2007 Jef Spaleta <jspaleta@gmail.com> - 0.5.2-2.1
 - minor correction for f77 usage
 
