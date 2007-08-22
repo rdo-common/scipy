@@ -3,10 +3,10 @@
 Summary: Scipy: array processing for numbers, strings, records, and objects
 Name: scipy
 Version: 0.5.2
-Release: 2.2%{?dist}
+Release: 3%{?dist}
 
 Group: Development/Libraries
-License: BSD
+License: BSD and LGPLv2+
 Url: http://numeric.scipy.org
 Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
 
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug 21 2007 Jef Spaleta <jspaleta@gmail.com> - 0.5.2-3
+- fix licensing tag and bump for buildid rebuild
+
 * Wed Apr 18 2007 Jef Spaleta <jspaleta@gmail.com> - 0.5.2-2.2
 - go back to using gfortran now that numpy is patched
 
