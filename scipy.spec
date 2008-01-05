@@ -3,7 +3,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.6.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -61,10 +61,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc LICENSE.txt
 %{python_sitearch}/scipy
+%{python_sitearch}/*.egg-info
 
 
 
 %changelog
+* Fri Jan 04 2008 Jef Spaleta <jspaleta@fedoraproject.org> - 0.6.0-4
+- fix for egg-info file creation
+
 * Wed Oct 03 2007 Jef Spaleta <jspaleta@gmail.com> - 0.6.0-3
 - include_dirs changes for ufsparse change in development
 
