@@ -3,7 +3,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.6.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -66,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Feb 19 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0.6.0-5
+- Autorebuild for GCC 4.3
+
 * Fri Jan 04 2008 Jef Spaleta <jspaleta@fedoraproject.org> - 0.6.0-4
 - fix for egg-info file creation
 
