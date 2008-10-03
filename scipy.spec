@@ -3,7 +3,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.6.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -48,8 +48,8 @@ include_dirs = /usr/include/suitesparse:/usr/include/ufsparse
 umfpack_libs = umfpack
 EOF
 
-cp %{SOURCE1} scipy/stsci/image/
-cp %{SOURCE2} scipy/stsci/convolve/
+cp %{SOURCE1} scipy/stsci/image/setup.py
+cp %{SOURCE2} scipy/stsci/convolve/setup.py
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir} FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu95 --noarch build
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Oct 03 2008 Jef Spaleta <jspaleta@fedoraproject.org> - 0.6.0-7
+- fix the stsci fix
+
 * Thu Oct 02 2008 Jef Spaleta <jspaleta@fedoraproject.org> - 0.6.0-6
 - include missing setup files for stsci module
 
