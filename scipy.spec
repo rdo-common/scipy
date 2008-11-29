@@ -3,7 +3,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.6.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 0.6.0-8
+- Rebuild for Python 2.6
+
 * Fri Oct 03 2008 Jef Spaleta <jspaleta@fedoraproject.org> - 0.6.0-7
 - fix the stsci fix
 
