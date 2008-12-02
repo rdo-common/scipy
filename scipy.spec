@@ -1,14 +1,14 @@
 %define python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
-
+%define betaversion 0.7.0b1
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.6.0
-Release: 8%{?dist}
+Version: 0.7.0
+Release: 0.1.b1%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Url: http://www.scipy.org
-Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
+Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{betaversion}.tar.gz
 # Missing setup.py files which control the build of this module
 # These should be removed as soon as upstream pushes a release with this fixed
 Source1: stsci_image_setup.py
@@ -34,8 +34,8 @@ use, but powerful enough to be depended upon by some of the world's
 leading scientists and engineers.
 
 
-%prep
-%setup -q
+%prep 
+%setup -q -n %{name}-%{betaversion}
 cat > site.cfg << EOF
 [amd]
 library_dirs = %{_libdir}
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Dec 01 2008  Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.0-0.1.b1
+- Update to latest beta which lists python 2.6 support
+
 * Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 0.6.0-8
 - Rebuild for Python 2.6
 
