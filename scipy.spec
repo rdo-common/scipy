@@ -2,7 +2,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.7.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -16,11 +16,11 @@ Patch0: stsci_image_syntax.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: numpy, python-devel
+BuildRequires: numpy, python-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, ufsparse-devel
 BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
-Requires: numpy, python
+Requires: numpy, python,f2py
 
 
 %description
@@ -75,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Apr 7  2009 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.0-3
+- Add f2py requires to prepared for numpy packaging split
+
 * Sun Mar 1  2009 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.0-2
 - Patch for stsci image function syntax fix.
 
