@@ -13,8 +13,7 @@ Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
 Source1: stsci_image_setup.py
 Source2: stsci_convolve_setup.py
 Patch0: stsci_image_syntax.patch
-Patch1: scipy_gcc34.patch
-
+Patch1: scipy_gcc43.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
