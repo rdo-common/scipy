@@ -2,7 +2,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.7.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -13,6 +13,7 @@ Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
 Source1: stsci_image_setup.py
 Source2: stsci_convolve_setup.py
 Patch0: stsci_image_syntax.patch
+Patch1: scipy_gcc34.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -38,6 +39,7 @@ leading scientists and engineers.
 %prep 
 %setup -q -n %{name}-%{version}
 %patch0 -p0
+%patch1 -p1
 cat > site.cfg << EOF
 [amd]
 library_dirs = %{_libdir}
@@ -75,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Jun 14  2009 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.0-4
+- Fix for gcc34 weave blitz bug #505379
+
 * Tue Apr 7  2009 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.0-3
 - Add f2py requires to prepared for numpy packaging split
 
