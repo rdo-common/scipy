@@ -1,8 +1,8 @@
 %define python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.7.1
-Release: 3%{?dist}
+Version: 0.7.2
+Release: 1%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -76,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jul 1 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.2-1
+- New upstream release 
+
 * Mon Apr 11 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.1-3
 - Bump for rebuild against numpy 1.3 
 
