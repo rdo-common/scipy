@@ -2,7 +2,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.7.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -76,6 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 0.7.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
+
 * Thu Jul 1 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.2-1
 - New upstream release 
 
