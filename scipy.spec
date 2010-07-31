@@ -14,6 +14,8 @@ Source1: stsci_image_setup.py
 Source2: stsci_convolve_setup.py
 Patch0: stsci_image_syntax.patch
 Patch1: scipy_gcc43.patch
+# Backport of python-2.7 build fixes upstream
+Patch2: scipy-py27-backport.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
@@ -39,6 +41,7 @@ leading scientists and engineers.
 %setup -q -n %{name}-%{version}
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
 cat > site.cfg << EOF
 [amd]
 library_dirs = %{_libdir}
@@ -76,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jul 31 2010 Toshio Kuratomi <toshio@fedoraproject.org> - 0.7.2-3
+- Fix scipy build on python-2.7
+
 * Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 0.7.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
 
