@@ -1,21 +1,13 @@
 %define python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.7.2
-Release: 3%{?dist}
+Version: 0.9.0
+Release: 1%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Url: http://www.scipy.org
 Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
-# Missing setup.py files which control the build of this module
-# These should be removed as soon as upstream pushes a release with this fixed
-Source1: stsci_image_setup.py
-Source2: stsci_convolve_setup.py
-Patch0: stsci_image_syntax.patch
-Patch1: scipy_gcc43.patch
-# Backport of python-2.7 build fixes upstream
-Patch2: scipy-py27-backport.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
@@ -39,9 +31,6 @@ leading scientists and engineers.
 
 %prep 
 %setup -q -n %{name}-%{version}
-%patch0 -p0
-%patch1 -p1
-%patch2 -p1
 cat > site.cfg << EOF
 [amd]
 library_dirs = %{_libdir}
@@ -54,8 +43,6 @@ include_dirs = /usr/include/suitesparse:/usr/include/ufsparse
 umfpack_libs = umfpack
 EOF
 
-cp %{SOURCE1} scipy/stsci/image/setup.py
-cp %{SOURCE2} scipy/stsci/convolve/setup.py
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu95 --noarch build
@@ -64,6 +51,12 @@ env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdi
 %install
 rm -rf $RPM_BUILD_ROOT
 env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py install --root=$RPM_BUILD_ROOT
+
+
+%check
+mkdir test
+cd test
+PYTHONPATH=$RPM_BUILD_ROOT%{python_sitearch} python -c "import scipy; scipy.test('full')"
 
 
 %clean
@@ -79,6 +72,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Apr 1 2011 Orion Poplawski <orion@cora.nwra.com> - 0.9.0-1
+- Update to 0.9.0
+- Drop all stsci sources and patches, dropped from upstream
+- Drop gcc and py27 patches fixed upstream
+- Add %%check section to run tests
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
