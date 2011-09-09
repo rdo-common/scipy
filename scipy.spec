@@ -1,8 +1,22 @@
-%define python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
+%if (0%{?fedora} > 15 || 0%{?rhel} > 5)
+%global with_python3 1
+%{?filter_setup:
+%filter_provides_in %{python_sitearch}.*\.so$
+%filter_provides_in %{python3_sitearch}.*\.so$
+%filter_setup
+}
+%else
+%global python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
+%{?filter_setup:
+%filter_provides_in %{python_sitearch}.*\.so$
+%filter_setup
+}
+%endif
+
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -16,6 +30,11 @@ BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
 Requires: numpy, python,f2py
 
+%if 0%{?with_python3}
+BuildRequires:  python3-numpy, python3-devel, python3-f2py
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-nose
+%endif
 
 %description
 Scipy is open-source software for mathematics, science, and
@@ -29,9 +48,28 @@ use, but powerful enough to be depended upon by some of the world's
 leading scientists and engineers.
 
 
-%prep 
+%if 0%{?with_python3}
+%package -n python3-scipy
+Summary: Scipy: Scientific Tools for Python
+Group: Development/Libraries
+License: BSD and LGPLv2+
+%description -n python3-scipy
+Scipy is open-source software for mathematics, science, and
+engineering. The core library is NumPy which provides convenient and
+fast N-dimensional array manipulation. The SciPy library is built to
+work with NumPy arrays, and provides many user-friendly and efficient
+numerical routines such as routines for numerical integration and
+optimization. Together, they run on all popular operating systems, are
+quick to install, and are free of charge. NumPy and SciPy are easy to
+use, but powerful enough to be depended upon by some of the world's
+leading scientists and engineers.
+
+%endif # with _python3
+
+%prep
 %setup -q -n %{name}-%{version}
 cat > site.cfg << EOF
+
 [amd]
 library_dirs = %{_libdir}
 include_dirs = /usr/include/suitesparse:/usr/include/ufsparse
@@ -44,16 +82,43 @@ umfpack_libs = umfpack
 EOF
 
 
+%if 0%{?with_python3}
+rm -rf %{py3dir}
+cp -a . %{py3dir}
+%endif
+
 %build
+%if 0%{?with_python3}
+pushd %{py3dir}
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python3 setup.py config_fc --fcompiler=gnu95 --noarch build
+popd
+%endif # with _python3
+
 env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu95 --noarch build
+
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
+# first install python3 so the binaries are overwritten by the python2 ones
+%if 0%{?with_python3}
+pushd %{py3dir}
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python3 setup.py install --root=$RPM_BUILD_ROOT
+popd
+%endif # with_python3
+
 env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py install --root=$RPM_BUILD_ROOT
 
 
 %check
+%if 0%{?with_python3}
+pushd %{py3dir}
+mkdir test
+cd test
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} python3 -c "import scipy; scipy.test('full')"
+popd
+%endif # with_python3
+
 mkdir test
 cd test
 PYTHONPATH=$RPM_BUILD_ROOT%{python_sitearch} python -c "import scipy; scipy.test('full')"
@@ -63,15 +128,29 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python_sitearch} python -c "import scipy; scipy.test
 rm -rf $RPM_BUILD_ROOT
 
 
-%files 
+%files
 %defattr(-,root,root,-)
 %doc LICENSE.txt
 %{python_sitearch}/scipy
 %{python_sitearch}/*.egg-info
 
 
+%if 0%{?with_python3}
+%files -n python3-scipy
+%defattr(-,root,root,-)
+%doc LICENSE.txt
+%{python3_sitearch}/scipy
+%{python3_sitearch}/*.egg-info
+%endif # with_python3
 
 %changelog
+* Sat Sep  3 2011 Thomas Spura <tomspur@fedoraproject.org> - 0.9.0-2
+- little cosmetic changes
+- filter provides in python_sitearch
+
+* Fri Sep 02 2011 Andrew McNabb <amcnabb@mcnabbs.org>
+- add python3 subpackage
+
 * Fri Apr 1 2011 Orion Poplawski <orion@cora.nwra.com> - 0.9.0-1
 - Update to 0.9.0
 - Drop all stsci sources and patches, dropped from upstream
