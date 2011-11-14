@@ -15,8 +15,8 @@
 
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.9.0
-Release: 2%{?dist}
+Version: 0.10.0
+Release: 1%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -67,7 +67,7 @@ leading scientists and engineers.
 %endif # with _python3
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 cat > site.cfg << EOF
 
 [amd]
@@ -144,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Mon Nov 14 2011 Orion Poplawski <orion@cora.nwra.com> - 0.10.0-1
+- Update to 0.10.0
+
 * Sat Sep  3 2011 Thomas Spura <tomspur@fedoraproject.org> - 0.9.0-2
 - little cosmetic changes
 - filter provides in python_sitearch
