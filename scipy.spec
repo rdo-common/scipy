@@ -15,8 +15,8 @@
 
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.10.0
-Release: 2%{?dist}
+Version: 0.10.1
+Release: 1%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -144,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Fri Mar 16 2012 Orion Poplawski <orion@cora.nwra.com> - 0.10.1-1
+- Update to 0.10.1
+
 * Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.10.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
