@@ -1,4 +1,4 @@
-%if (0%{?fedora} > 15 || 0%{?rhel} > 5)
+%if (0%{?fedora} > 15
 %global with_python3 1
 %{?filter_setup:
 %filter_provides_in %{python_sitearch}.*\.so$
@@ -16,7 +16,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.10.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -144,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Fri Aug  3 2012 David Malcolm <dmalcolm@redhat.com> - 0.10.1-3
+- remove rhel logic from with_python3 conditional
+
 * Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.10.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
