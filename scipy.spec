@@ -16,7 +16,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.10.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -144,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Mon Aug  6 2012 Orion Poplawski <orion@cora.nwra.com> - 0.10.1-4
+- Rebuild for python 3.3
+
 * Fri Aug  3 2012 David Malcolm <dmalcolm@redhat.com> - 0.10.1-3
 - remove rhel logic from with_python3 conditional
 
