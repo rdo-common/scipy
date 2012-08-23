@@ -15,13 +15,13 @@
 
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.10.1
-Release: 4%{?dist}
+Version: 0.11.0
+Release: 0.1.rc2%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Url: http://www.scipy.org
-Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
+Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}rc2.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
@@ -67,7 +67,7 @@ leading scientists and engineers.
 %endif # with _python3
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}rc2
 cat > site.cfg << EOF
 
 [amd]
@@ -144,6 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Thu Aug 23 2012 Orion Poplawski <orion@cora.nwra.com> - 0.11.0-0.1.rc2
+- Update to 0.11.0rc2
+
 * Mon Aug  6 2012 Orion Poplawski <orion@cora.nwra.com> - 0.10.1-4
 - Rebuild for python 3.3
 
