@@ -16,12 +16,15 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.11.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Url: http://www.scipy.org
 Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
+# Upstream patch from https://github.com/scipy/scipy/pull/404/commits to fix
+# python3.3 issues
+Patch0:  scipy-linalg.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
@@ -69,6 +72,7 @@ leading scientists and engineers.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1 -b .linalg
 cat > site.cfg << EOF
 
 [amd]
@@ -116,7 +120,7 @@ env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdi
 pushd %{py3dir}
 mkdir test
 cd test
-#PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} python3 -c "import scipy; scipy.test('full')"
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} python3 -c "import scipy; scipy.test('full')"
 popd
 %endif # with_python3
 
@@ -145,6 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Wed Feb 13 2013 Orion Poplawski <orion@cora.nwra.com> - 0.11.0-4
+- Add patch from upstream to fix python3.3 issues in linalg routines
+
 * Tue Feb 12 2013 Orion Poplawski <orion@cora.nwra.com> - 0.11.0-3
 - Disable python3 tests for now
 
