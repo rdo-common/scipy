@@ -86,6 +86,8 @@ EOF
 %if 0%{?with_python3}
 rm -rf %{py3dir}
 cp -a . %{py3dir}
+rm -r %{py3dir}/scipy/weave
+sed -i -e /weave/d %{py3dir}/scipy/setup.py
 %endif
 
 %build
