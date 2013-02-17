@@ -15,16 +15,13 @@
 
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
-Version: 0.11.0
-Release: 4%{?dist}
+Version: 0.12.0
+Release: 0.1.b1%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Url: http://www.scipy.org
-Source0: http://prdownloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
-# Upstream patch from https://github.com/scipy/scipy/pull/404/commits to fix
-# python3.3 issues
-Patch0:  scipy-linalg.patch
+Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}b1.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
@@ -71,8 +68,7 @@ leading scientists and engineers.
 %endif # with _python3
 
 %prep
-%setup -q -n %{name}-%{version}
-%patch0 -p1 -b .linalg
+%setup -q -n %{name}-%{version}b1
 cat > site.cfg << EOF
 
 [amd]
@@ -149,6 +145,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Sat Feb 16 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-0.1.b1
+- Update to 0.12.0b1
+- Drop upstreamed linalg patch
+
 * Wed Feb 13 2013 Orion Poplawski <orion@cora.nwra.com> - 0.11.0-4
 - Add patch from upstream to fix python3.3 issues in linalg routines
 
