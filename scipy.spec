@@ -16,12 +16,14 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.12.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
+# Fix definition on gerqf that caused test segfault
+Patch0:  scipy-gerqf.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
@@ -69,6 +71,7 @@ leading scientists and engineers.
 
 %prep
 %setup -q
+%patch0 -p1 -b .gerqf
 cat > site.cfg << EOF
 
 [amd]
@@ -145,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
+- Add patch to fix segfaul in test of sgeqrf
+
 * Wed Apr 10 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-1
 - Update to 0.12.0 final
 - No longer remove weave from python3 build
