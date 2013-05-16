@@ -1,17 +1,9 @@
-%if 0%{?fedora} > 15
 %global with_python3 1
 %{?filter_setup:
 %filter_provides_in %{python_sitearch}.*\.so$
 %filter_provides_in %{python3_sitearch}.*\.so$
 %filter_setup
 }
-%else
-%global python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
-%{?filter_setup:
-%filter_provides_in %{python_sitearch}.*\.so$
-%filter_setup
-}
-%endif
 
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
