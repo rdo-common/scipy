@@ -16,7 +16,7 @@
 Summary: Scipy: Scientific Tools for Python
 Name: scipy
 Version: 0.12.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Group: Development/Libraries
 License: BSD and LGPLv2+
@@ -27,7 +27,7 @@ Patch0:  scipy-gerqf.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
-BuildRequires: fftw-devel, blas-devel, lapack-devel, ufsparse-devel
+BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
 BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
 Requires: numpy, python,f2py
@@ -76,12 +76,12 @@ cat > site.cfg << EOF
 
 [amd]
 library_dirs = %{_libdir}
-include_dirs = /usr/include/suitesparse:/usr/include/ufsparse
+include_dirs = /usr/include/suitesparse
 amd_libs = amd
 
 [umfpack]
 library_dirs = %{_libdir}
-include_dirs = /usr/include/suitesparse:/usr/include/ufsparse
+include_dirs = /usr/include/suitesparse
 umfpack_libs = umfpack
 EOF
 
@@ -148,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Wed May 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-3
+- Remove old ufsparse references, use suitesparse
+
 * Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
 - Add patch to fix segfaul in test of sgeqrf
 
