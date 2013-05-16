@@ -16,7 +16,6 @@ Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
 # Fix definition on gerqf that caused test segfault
 Patch0:  scipy-gerqf.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: numpy, python-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -125,7 +124,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root,-)
 %doc LICENSE.txt
 %{python_sitearch}/scipy
 %{python_sitearch}/*.egg-info
@@ -133,7 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if 0%{?with_python3}
 %files -n python3-scipy
-%defattr(-,root,root,-)
 %doc LICENSE.txt
 %{python3_sitearch}/scipy
 %{python3_sitearch}/*.egg-info
@@ -142,6 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Wed May 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-3
 - Remove old ufsparse references, use suitesparse
+- Spec cleanup
 
 * Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
 - Add patch to fix segfaul in test of sgeqrf
