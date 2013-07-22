@@ -140,6 +140,8 @@ rm -rf $RPM_BUILD_ROOT
 * Wed May 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-3
 - Remove old ufsparse references, use suitesparse
 - Spec cleanup
+- Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com>:
+ - Fix rpmlint warnings
 
 * Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
 - Add patch to fix segfaul in test of sgeqrf
@@ -201,7 +203,7 @@ rm -rf $RPM_BUILD_ROOT
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
-* Fri Jul 31 2010 Toshio Kuratomi <toshio@fedoraproject.org> - 0.7.2-3
+* Sat Jul 31 2010 Toshio Kuratomi <toshio@fedoraproject.org> - 0.7.2-3
 - Fix scipy build on python-2.7
 
 * Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 0.7.2-2
@@ -210,7 +212,7 @@ rm -rf $RPM_BUILD_ROOT
 * Thu Jul 1 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.2-1
 - New upstream release
 
-* Mon Apr 11 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.1-3
+* Sun Apr 11 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.1-3
 - Bump for rebuild against numpy 1.3
 
 * Thu Apr  1 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.1-2
