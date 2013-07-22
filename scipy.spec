@@ -208,13 +208,13 @@ rm -rf $RPM_BUILD_ROOT
 - Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
 
 * Thu Jul 1 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.2-1
-- New upstream release 
+- New upstream release
 
 * Mon Apr 11 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.1-3
-- Bump for rebuild against numpy 1.3 
+- Bump for rebuild against numpy 1.3
 
 * Thu Apr  1 2010 Jef Spaleta <jspaleta@fedoraproject.org> - 0.7.1-2
-- Bump for rebuild against numpy 1.4.0 
+- Bump for rebuild against numpy 1.4.0
 
 * Thu Dec 10 2009 Jon Ciesla <limb@jcomserv.net> - 0.7.1-1
 - Update to 0.7.1.
@@ -296,7 +296,7 @@ rm -rf $RPM_BUILD_ROOT
 - Bump for rebuild against python 2.5 in devel tree
 
 * Sun Dec  3 2006 Jef Spaleta <jspaleta@gmail.com> - 0.5.1-4
-- Minor adjustments to specfile for packaging guidelines. 
+- Minor adjustments to specfile for packaging guidelines.
 - Changed buildrequires fftw version 3  from fftw2
 
 * Sat Dec  2 2006 Jef Spaleta <jspaleta@gmail.com> - 0.5.1-2
