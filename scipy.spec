@@ -11,7 +11,10 @@ Version: 0.12.0
 Release: 3%{?dist}
 
 Group: Development/Libraries
-License: BSD and LGPLv2+
+# BSD -- whole package except:
+# Boost -- scipy/special/cephes/scipy_iv.c
+# Public Domain -- scipy/odr/__odrpack.c
+License: BSD and Boost and Public Domain
 Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
 # Fix definition on gerqf that caused test segfault
@@ -142,6 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 - Spec cleanup
 - Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com>:
  - Fix rpmlint warnings
+ - License update
 
 * Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
 - Add patch to fix segfaul in test of sgeqrf
