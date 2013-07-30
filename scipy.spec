@@ -19,6 +19,7 @@ Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
 # Fix definition on gerqf that caused test segfault
 Patch0:  scipy-gerqf.patch
+Patch1:  use-argument-build_dir.patch
 
 BuildRequires: numpy, python-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -66,6 +67,7 @@ leading scientists and engineers.
 %prep
 %setup -q
 %patch0 -p1 -b .gerqf
+%patch1 -p1
 cat > site.cfg << EOF
 
 [amd]
@@ -146,6 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 - Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com>:
  - Fix rpmlint warnings
  - License update
+ - Add patch to use build_dir argument in build_extension
 
 * Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
 - Add patch to fix segfaul in test of sgeqrf
