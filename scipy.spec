@@ -5,10 +5,13 @@
 %filter_setup
 }
 
-Summary: Scipy: Scientific Tools for Python
+# Set to pre-release version suffix if building pre-release, else %{nil}
+%define rcver b1
+
+Summary: Scientific Tools for Python
 Name: scipy
-Version: 0.12.0
-Release: 4%{?dist}
+Version: 0.13.0
+Release: 0.1.b1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -16,10 +19,7 @@ Group: Development/Libraries
 # Public Domain -- scipy/odr/__odrpack.c
 License: BSD and Boost and Public Domain
 Url: http://www.scipy.org
-Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}.tar.gz
-# Fix definition on gerqf that caused test segfault
-Patch0:  scipy-gerqf.patch
-Patch1:  use-argument-build_dir.patch
+Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
 
 BuildRequires: numpy, python-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -47,7 +47,7 @@ leading scientists and engineers.
 
 %if 0%{?with_python3}
 %package -n python3-scipy
-Summary: Scipy: Scientific Tools for Python
+Summary: Scientific Tools for Python
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Requires:  python3-numpy, python3-f2py
@@ -65,9 +65,7 @@ leading scientists and engineers.
 %endif # with _python3
 
 %prep
-%setup -q
-%patch0 -p1 -b .gerqf
-%patch1 -p1
+%setup -q -n %{name}-%{version}%{?rcver}
 cat > site.cfg << EOF
 
 [amd]
@@ -142,16 +140,22 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Thu Aug 29 2013 Orion Poplwski <orion@cora.nwra.com> - 0.13.0-0.1.b1
+- Update to 0.13.0b1
+- Drop patches applied upstream
+- Fixup changelog and summary
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.12.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+- Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com> - 0.12.0-4
+ - Fix rpmlint warnings
+ - License update
+ - Add patch to use build_dir argument in build_extension
 
 * Wed May 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-3
 - Remove old ufsparse references, use suitesparse
 - Spec cleanup
-- Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com>:
- - Fix rpmlint warnings
- - License update
- - Add patch to use build_dir argument in build_extension
 
 * Mon Apr 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-2
 - Add patch to fix segfaul in test of sgeqrf
