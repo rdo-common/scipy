@@ -11,7 +11,7 @@
 Summary: Scientific Tools for Python
 Name: scipy
 Version: 0.13.0
-Release: 0.1.b1%{?dist}
+Release: 0.2.b1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -21,16 +21,19 @@ License: BSD and Boost and Public Domain
 Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
 
-BuildRequires: numpy, python-devel,f2py
+BuildRequires: numpy, python2-devel,f2py
+BuildRequires: python-six
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
 BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
 Requires: numpy, python,f2py
+Requires: python-six
 
 %if 0%{?with_python3}
 BuildRequires:  python3-numpy, python3-devel, python3-f2py
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-nose
+BuildRequires:  python3-six
 %endif
 
 %description
@@ -51,6 +54,7 @@ Summary: Scientific Tools for Python
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Requires:  python3-numpy, python3-f2py
+Requires:  python3-six
 %description -n python3-scipy
 Scipy is open-source software for mathematics, science, and
 engineering. The core library is NumPy which provides convenient and
@@ -66,6 +70,9 @@ leading scientists and engineers.
 
 %prep
 %setup -q -n %{name}-%{version}%{?rcver}
+# Bundled libs
+rm scipy/lib/six.py
+find -name \*.py | xargs sed -i -e 's/scipy\.lib\.six/six/'
 cat > site.cfg << EOF
 
 [amd]
@@ -140,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Mon Sep 9 2013 Orion Poplwski <orion@cora.nwra.com> - 0.13.0-0.2.b1
+- Unbundle python-six (bug #1005350)
+
 * Thu Aug 29 2013 Orion Poplwski <orion@cora.nwra.com> - 0.13.0-0.1.b1
 - Update to 0.13.0b1
 - Drop patches applied upstream
