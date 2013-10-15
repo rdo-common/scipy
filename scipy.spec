@@ -6,12 +6,12 @@
 }
 
 # Set to pre-release version suffix if building pre-release, else %{nil}
-%define rcver b1
+%define rcver rc1
 
 Summary: Scientific Tools for Python
 Name: scipy
 Version: 0.13.0
-Release: 0.3.b1%{?dist}
+Release: 0.4.rc1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -147,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Tue Oct 15 2013 Orion Poplwski <orion@cora.nwra.com> - 0.13.0-0.4.rc1
+- Update to 0.13.0rc1
+
 * Tue Oct 01 2013 Tomas Tomecek <ttomecek@redhat.com> - 0.13.0-0.3.b1
 - rebuilt with atlas 3.10
 
