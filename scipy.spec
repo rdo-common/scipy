@@ -164,10 +164,10 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.12.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
-- Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com> - 0.12.0-4
- - Fix rpmlint warnings
- - License update
- - Add patch to use build_dir argument in build_extension
+* Tue Jul 30 2013 Tomas Tomecek <ttomecek@redhat.com> - 0.12.0-4
+- Fix rpmlint warnings
+- License update
+- Add patch to use build_dir argument in build_extension
 
 * Wed May 15 2013 Orion Poplawski <orion@cora.nwra.com> - 0.12.0-3
 - Remove old ufsparse references, use suitesparse
