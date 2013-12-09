@@ -10,8 +10,8 @@
 
 Summary: Scientific Tools for Python
 Name: scipy
-Version: 0.13.1
-Release: 2%{?dist}
+Version: 0.13.2
+Release: 1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -147,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Mon Dec 9 2013 Orion Poplwski <orion@cora.nwra.com> - 0.13.2-1
+- Update to 0.13.2
+
 * Fri Dec 06 2013 Nils Philippsen <nils@redhat.com> - 0.13.1-2
 - rebuild (suitesparse)
 
