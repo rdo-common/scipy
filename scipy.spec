@@ -10,7 +10,7 @@
 
 Summary: Scientific Tools for Python
 Name: scipy
-Version: 0.13.2
+Version: 0.13.3
 Release: 1%{?dist}
 
 Group: Development/Libraries
@@ -147,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Tue Feb  4 2014 Thomas Spura <tomspur@fedoraproject.org> - 0.13.3-1
+- Update to 0.13.3
+
 * Mon Dec 9 2013 Orion Poplwski <orion@cora.nwra.com> - 0.13.2-1
 - Update to 0.13.2
 
