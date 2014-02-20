@@ -1,6 +1,6 @@
 %global with_python3 1
 %{?filter_setup:
-%filter_provides_in %{python_sitearch}.*\.so$
+%filter_provides_in %{python2_sitearch}.*\.so$
 %filter_provides_in %{python3_sitearch}.*\.so$
 %filter_setup
 }
@@ -11,7 +11,7 @@
 Summary: Scientific Tools for Python
 Name: scipy
 Version: 0.13.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -95,11 +95,11 @@ cp -a . %{py3dir}
 %build
 %if 0%{?with_python3}
 pushd %{py3dir}
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python3 setup.py config_fc --fcompiler=gnu95 --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python3 setup.py config_fc --fcompiler=gnu95 --noarch build
 popd
 %endif # with _python3
 
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py config_fc --fcompiler=gnu95 --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python2 setup.py config_fc --fcompiler=gnu95 --noarch build
 
 
 
@@ -108,11 +108,11 @@ rm -rf $RPM_BUILD_ROOT
 # first install python3 so the binaries are overwritten by the python2 ones
 %if 0%{?with_python3}
 pushd %{py3dir}
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python3 setup.py install --root=$RPM_BUILD_ROOT
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python3 setup.py install --root=$RPM_BUILD_ROOT
 popd
 %endif # with_python3
 
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} python setup.py install --root=$RPM_BUILD_ROOT
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python2 setup.py install --root=$RPM_BUILD_ROOT
 
 
 %check
@@ -120,13 +120,13 @@ env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdi
 pushd %{py3dir}
 mkdir test
 cd test
-PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} python3 -c "import scipy; scipy.test('full')"
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} __python3 -c "import scipy; scipy.test('full')"
 popd
 %endif # with_python3
 
 mkdir test
 cd test
-PYTHONPATH=$RPM_BUILD_ROOT%{python_sitearch} python -c "import scipy; scipy.test('full')"
+PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} __python2 -c "import scipy; scipy.test('full')"
 
 
 %clean
@@ -135,8 +135,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %doc LICENSE.txt
-%{python_sitearch}/scipy
-%{python_sitearch}/*.egg-info
+%{python2_sitearch}/scipy
+%{python2_sitearch}/*.egg-info
 
 
 %if 0%{?with_python3}
@@ -147,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Thu Feb 20 2014 Thomas Spura <tomspur@fedoraproject.org> - 0.13.3-2
+- use python2 macros everywhere (Requested by Han Boetes)
+
 * Tue Feb  4 2014 Thomas Spura <tomspur@fedoraproject.org> - 0.13.3-1
 - Update to 0.13.3
 
