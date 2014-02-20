@@ -95,11 +95,11 @@ cp -a . %{py3dir}
 %build
 %if 0%{?with_python3}
 pushd %{py3dir}
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python3 setup.py config_fc --fcompiler=gnu95 --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python3 setup.py config_fc --fcompiler=gnu95 --noarch build
 popd
 %endif # with _python3
 
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python2 setup.py config_fc --fcompiler=gnu95 --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python2 setup.py config_fc --fcompiler=gnu95 --noarch build
 
 
 
@@ -108,11 +108,11 @@ rm -rf $RPM_BUILD_ROOT
 # first install python3 so the binaries are overwritten by the python2 ones
 %if 0%{?with_python3}
 pushd %{py3dir}
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python3 setup.py install --root=$RPM_BUILD_ROOT
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python3 setup.py install --root=$RPM_BUILD_ROOT
 popd
 %endif # with_python3
 
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} __python2 setup.py install --root=$RPM_BUILD_ROOT
+env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python2 setup.py install --root=$RPM_BUILD_ROOT
 
 
 %check
@@ -120,13 +120,13 @@ env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdi
 pushd %{py3dir}
 mkdir test
 cd test
-PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} __python3 -c "import scipy; scipy.test('full')"
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %__python3 -c "import scipy; scipy.test('full')"
 popd
 %endif # with_python3
 
 mkdir test
 cd test
-PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} __python2 -c "import scipy; scipy.test('full')"
+PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} %__python2 -c "import scipy; scipy.test('full')"
 
 
 %clean
