@@ -6,12 +6,12 @@
 }
 
 # Set to pre-release version suffix if building pre-release, else %{nil}
-#%%define rcver rc1
+%global rcver %{nil}
 
 Summary: Scientific Tools for Python
 Name: scipy
-Version: 0.13.3
-Release: 2%{?dist}
+Version: 0.14.0
+Release: 1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -22,18 +22,15 @@ Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
 
 BuildRequires: numpy, python2-devel,f2py
-BuildRequires: python-six
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
 BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
 Requires: numpy, python,f2py
-Requires: python-six
 
 %if 0%{?with_python3}
 BuildRequires:  python3-numpy, python3-devel, python3-f2py
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-nose
-BuildRequires:  python3-six
 %endif
 
 %description
@@ -54,7 +51,6 @@ Summary: Scientific Tools for Python
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Requires:  python3-numpy, python3-f2py
-Requires:  python3-six
 %description -n python3-scipy
 Scipy is open-source software for mathematics, science, and
 engineering. The core library is NumPy which provides convenient and
@@ -70,9 +66,6 @@ leading scientists and engineers.
 
 %prep
 %setup -q -n %{name}-%{version}%{?rcver}
-# Bundled libs
-rm scipy/lib/six.py
-find -name \*.py | xargs sed -i -e 's/scipy\.lib\.six/six/'
 cat > site.cfg << EOF
 
 [amd]
@@ -147,6 +140,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Tue May  6 2014 Orion Poplawski <orion@cora.nwra.com> - 0.14-1
+- Update to 0.14
+- Do not use system python-six (bug #1046817)
+
 * Thu Feb 20 2014 Thomas Spura <tomspur@fedoraproject.org> - 0.13.3-2
 - use python2 macros everywhere (Requested by Han Boetes)
 
