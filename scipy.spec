@@ -11,7 +11,7 @@
 Summary: Scientific Tools for Python
 Name: scipy
 Version: 0.14.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -140,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Sat May 10 2014 Orion Poplawski <orion@cora.nwra.com> - 0.14-2
+- Rebuild with Python 3.4
+
 * Tue May  6 2014 Orion Poplawski <orion@cora.nwra.com> - 0.14-1
 - Update to 0.14
 - Do not use system python-six (bug #1046817)
