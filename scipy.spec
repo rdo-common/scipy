@@ -11,7 +11,7 @@
 Summary: Scientific Tools for Python
 Name: scipy
 Version: 0.14.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -140,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.14.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Sat May 10 2014 Orion Poplawski <orion@cora.nwra.com> - 0.14-2
 - Rebuild with Python 3.4
 
