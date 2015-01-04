@@ -10,8 +10,8 @@
 
 Summary: Scientific Tools for Python
 Name: scipy
-Version: 0.14.0
-Release: 5%{?dist}
+Version: 0.14.1
+Release: 1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -140,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Sun Jan 4 2015 Orion Poplawski <orion@cora.nwra.com> - 0.14.1-1
+- Update to 0.14.1
+
 * Wed Aug 20 2014 Kevin Fenzi <kevin@scrye.com> - 0.14.0-5
 - Rebuild for rpm bug 1131892
 
