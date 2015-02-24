@@ -11,7 +11,7 @@
 Summary: Scientific Tools for Python
 Name: scipy
 Version: 0.14.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -140,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Tue Feb 24 2015 Jitka Plesnikova <jplesnik@redhat.com> - 0.14.1-2
+- SWIG Test Rebuild
+
 * Sun Jan 4 2015 Orion Poplawski <orion@cora.nwra.com> - 0.14.1-1
 - Update to 0.14.1
 
