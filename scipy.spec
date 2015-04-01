@@ -10,7 +10,7 @@
 
 Summary: Scientific Tools for Python
 Name: scipy
-Version: 0.14.1
+Version: 0.15.1
 Release: 1%{?dist}
 
 Group: Development/Libraries
@@ -140,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Tue Mar 31 2015 Orion Poplawski <orion@cora.nwra.com> - 0.15.1-1
+- Update to 0.15.1
+
 * Sun Jan 4 2015 Orion Poplawski <orion@cora.nwra.com> - 0.14.1-1
 - Update to 0.14.1
 
