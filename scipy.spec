@@ -5,13 +5,13 @@
 %filter_setup
 }
 
-# Set to pre-release version suffix if building pre-release, else %{nil}
+# Set to pre-release version suffix if building pre-release, else %%{nil}
 %global rcver %{nil}
 
-Summary: Scientific Tools for Python
-Name: scipy
-Version: 0.15.1
-Release: 2%{?dist}
+Summary:    Scientific Tools for Python
+Name:       scipy
+Version:    0.16.0
+Release:    1%{?dist}
 
 Group: Development/Libraries
 # BSD -- whole package except:
@@ -25,6 +25,7 @@ BuildRequires: numpy, python2-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
 BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
+BuildRequires: qhull-devel
 Requires: numpy, python,f2py
 
 %if 0%{?with_python3}
@@ -80,19 +81,18 @@ umfpack_libs = umfpack
 EOF
 
 
-%if 0%{?with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-%endif
-
 %build
 %if 0%{?with_python3}
-pushd %{py3dir}
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python3 setup.py config_fc --fcompiler=gnu95 --noarch build
-popd
+env CFLAGS="$RPM_OPT_FLAGS" \
+    ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
+    %__python3 setup.py config_fc \
+    --fcompiler=gnu95 --noarch build
 %endif # with _python3
 
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python2 setup.py config_fc --fcompiler=gnu95 --noarch build
+env CFLAGS="$RPM_OPT_FLAGS" \
+    ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
+    %__python2 setup.py config_fc \
+    --fcompiler=gnu95 --noarch build
 
 
 
@@ -100,26 +100,28 @@ env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdi
 rm -rf $RPM_BUILD_ROOT
 # first install python3 so the binaries are overwritten by the python2 ones
 %if 0%{?with_python3}
-pushd %{py3dir}
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python3 setup.py install --root=$RPM_BUILD_ROOT
-popd
+env CFLAGS="$RPM_OPT_FLAGS" \
+    ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
+    %__python3 setup.py install --root=$RPM_BUILD_ROOT
 %endif # with_python3
 
-env CFLAGS="$RPM_OPT_FLAGS" ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} %__python2 setup.py install --root=$RPM_BUILD_ROOT
+env CFLAGS="$RPM_OPT_FLAGS" \
+    ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
+    %__python2 setup.py install --root=$RPM_BUILD_ROOT
 
 
 %check
 %if 0%{?with_python3}
-pushd %{py3dir}
-mkdir test
-cd test
-PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %__python3 -c "import scipy; scipy.test('full')"
-popd
+mkdir test3
+cd test3
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} \
+    %__python3 -c "import scipy; scipy.test('full', verbose=2)"
 %endif # with_python3
 
-mkdir test
-cd test
-PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} %__python2 -c "import scipy; scipy.test('full')"
+mkdir test2
+cd test2
+PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
+    %__python2 -c "import scipy; scipy.test('full', verbose=2)"
 
 
 %clean
@@ -140,6 +142,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif # with_python3
 
 %changelog
+* Wed Oct 14 2015 Thomas Spura <tomspur@fedoraproject.org> - 0.16.0-1
+- Update to 0.16.0
+
 * Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.15.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
