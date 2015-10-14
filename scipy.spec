@@ -46,12 +46,31 @@ use, but powerful enough to be depended upon by some of the world's
 leading scientists and engineers.
 
 
+%package -n python2-scipy
+Summary:    Scientific Tools for Python
+%{?python_provide:%python_provide python2-scipy}
+# General provides of plain 'scipy' in F24
+Provides:       scipy = %{epoch}:%{version}-%{release}
+Obsoletes:      scipy <= 0.16.0
+%description -n python2-scipy
+Scipy is open-source software for mathematics, science, and
+engineering. The core library is NumPy which provides convenient and
+fast N-dimensional array manipulation. The SciPy library is built to
+work with NumPy arrays, and provides many user-friendly and efficient
+numerical routines such as routines for numerical integration and
+optimization. Together, they run on all popular operating systems, are
+quick to install, and are free of charge. NumPy and SciPy are easy to
+use, but powerful enough to be depended upon by some of the world's
+leading scientists and engineers.
+
+
 %if 0%{?with_python3}
 %package -n python3-scipy
 Summary: Scientific Tools for Python
 Group: Development/Libraries
 License: BSD and LGPLv2+
 Requires:  python3-numpy, python3-f2py
+%{?python_provide:%python_provide python3-scipy}
 %description -n python3-scipy
 Scipy is open-source software for mathematics, science, and
 engineering. The core library is NumPy which provides convenient and
@@ -97,7 +116,6 @@ env CFLAGS="$RPM_OPT_FLAGS" \
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 # first install python3 so the binaries are overwritten by the python2 ones
 %if 0%{?with_python3}
 env CFLAGS="$RPM_OPT_FLAGS" \
@@ -124,11 +142,7 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
     %__python2 -c "import scipy; scipy.test('full', verbose=2)"
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
-%files
+%files -n python2-scipy
 %doc LICENSE.txt
 %{python2_sitearch}/scipy
 %{python2_sitearch}/*.egg-info
@@ -144,6 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Wed Oct 14 2015 Thomas Spura <tomspur@fedoraproject.org> - 0.16.0-1
 - Update to 0.16.0
+- Use python_provide macro
 
 * Fri Jun 19 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.15.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
