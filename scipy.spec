@@ -103,12 +103,14 @@ EOF
 %build
 %if 0%{?with_python3}
 env CFLAGS="$RPM_OPT_FLAGS" \
+    FFLAGS="$RPM_OPT_FLAGS -fPIC" \
     ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
     %__python3 setup.py config_fc \
     --fcompiler=gnu95 --noarch build
 %endif # with _python3
 
 env CFLAGS="$RPM_OPT_FLAGS" \
+    FFLAGS="$RPM_OPT_FLAGS -fPIC" \
     ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
     %__python2 setup.py config_fc \
     --fcompiler=gnu95 --noarch build
