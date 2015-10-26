@@ -50,7 +50,7 @@ leading scientists and engineers.
 Summary:    Scientific Tools for Python
 %{?python_provide:%python_provide python2-scipy}
 # General provides of plain 'scipy' in F24
-Provides:       scipy = %{epoch}:%{version}-%{release}
+Provides:       scipy = %{version}-%{release}
 Obsoletes:      scipy <= 0.16.0
 %description -n python2-scipy
 Scipy is open-source software for mathematics, science, and
