@@ -10,7 +10,7 @@
 
 Summary:    Scientific Tools for Python
 Name:       scipy
-Version:    0.16.0
+Version:    0.16.1
 Release:    1%{?dist}
 
 Group: Development/Libraries
@@ -158,6 +158,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Mon Oct 26 2015 Orion Poplawski <orion@cora.nwra.com> - 0.16.1-1
+- Update to 0.16.1
+
 * Wed Oct 14 2015 Thomas Spura <tomspur@fedoraproject.org> - 0.16.0-1
 - Update to 0.16.0
 - Use python_provide macro
