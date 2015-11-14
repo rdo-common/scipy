@@ -27,7 +27,6 @@ BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
 BuildRequires: atlas-devel
 BuildRequires: gcc-gfortran, swig
 BuildRequires: qhull-devel
-Requires: numpy, python,f2py
 
 %if 0%{?with_python3}
 BuildRequires:  python3-numpy, python3-devel, python3-f2py
@@ -49,6 +48,7 @@ leading scientists and engineers.
 
 %package -n python2-scipy
 Summary:    Scientific Tools for Python
+Requires:   numpy, f2py
 %{?python_provide:%python_provide python2-scipy}
 # General provides of plain 'scipy' in F24
 Provides:       scipy = %{version}-%{release}
@@ -163,6 +163,7 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %changelog
 * Sat Nov 14 2015 Thomas Spura <tomspur@fedoraproject.org> - 0.16.1-3
 - Add patch to fix ctypes test
+- Move requires to correct python2 subpackage
 
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.16.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
