@@ -13,14 +13,14 @@ Name:       scipy
 Version:    0.16.1
 Release:    2%{?dist}
 
-Group: Development/Libraries
+Group:      Development/Libraries
 # BSD -- whole package except:
 # Boost -- scipy/special/cephes/scipy_iv.c
 # Public Domain -- scipy/odr/__odrpack.c
-License: BSD and Boost and Public Domain
-Url: http://www.scipy.org
-Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
-Patch0: scipy-0.16.1-ctyptes-test.patch
+License:    BSD and Boost and Public Domain
+Url:        http://www.scipy.org
+Source0:    http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
+Patch0:     scipy-0.16.1-ctyptes-test.patch
 
 BuildRequires: numpy, python2-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -67,10 +67,10 @@ leading scientists and engineers.
 
 %if 0%{?with_python3}
 %package -n python3-scipy
-Summary: Scientific Tools for Python
-Group: Development/Libraries
-License: BSD and LGPLv2+
-Requires:  python3-numpy, python3-f2py
+Summary:    Scientific Tools for Python
+Group:      Development/Libraries
+License:    BSD and LGPLv2+
+Requires:   python3-numpy, python3-f2py
 %{?python_provide:%python_provide python3-scipy}
 %description -n python3-scipy
 Scipy is open-source software for mathematics, science, and
