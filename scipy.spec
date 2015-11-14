@@ -11,7 +11,7 @@
 Summary:    Scientific Tools for Python
 Name:       scipy
 Version:    0.16.1
-Release:    2%{?dist}
+Release:    3%{?dist}
 
 Group:      Development/Libraries
 # BSD -- whole package except:
