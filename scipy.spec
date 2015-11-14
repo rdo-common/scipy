@@ -20,6 +20,7 @@ Group: Development/Libraries
 License: BSD and Boost and Public Domain
 Url: http://www.scipy.org
 Source0: http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
+Patch0: scipy-0.16.1-ctyptes-test.patch
 
 BuildRequires: numpy, python2-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -99,6 +100,8 @@ include_dirs = /usr/include/suitesparse
 umfpack_libs = umfpack
 EOF
 
+%patch0 -p1
+
 
 %build
 %if 0%{?with_python3}
@@ -158,6 +161,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Sat Nov 14 2015 Thomas Spura <tomspur@fedoraproject.org> - 0.16.1-3
+- Add patch to fix ctypes test
+
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.16.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
 
