@@ -124,11 +124,13 @@ env CFLAGS="$RPM_OPT_FLAGS" \
 # first install python3 so the binaries are overwritten by the python2 ones
 %if 0%{?with_python3}
 env CFLAGS="$RPM_OPT_FLAGS" \
+    FFLAGS="$RPM_OPT_FLAGS -fPIC" \
     ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
     %__python3 setup.py install --root=$RPM_BUILD_ROOT
 %endif # with_python3
 
 env CFLAGS="$RPM_OPT_FLAGS" \
+    FFLAGS="$RPM_OPT_FLAGS -fPIC" \
     ATLAS=%{_libdir}/atlas FFTW=%{_libdir} BLAS=%{_libdir} LAPACK=%{_libdir} \
     %__python2 setup.py install --root=$RPM_BUILD_ROOT
 
@@ -164,6 +166,7 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 * Sat Nov 14 2015 Thomas Spura <tomspur@fedoraproject.org> - 0.16.1-3
 - Add patch to fix ctypes test
 - Move requires to correct python2 subpackage
+- Add FFLAGS also in %%install
 
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.16.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
