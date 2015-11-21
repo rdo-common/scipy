@@ -11,7 +11,7 @@
 Summary:    Scientific Tools for Python
 Name:       scipy
 Version:    0.16.1
-Release:    5%{?dist}
+Release:    6%{?dist}
 
 Group:      Development/Libraries
 # BSD -- whole package except:
@@ -52,6 +52,7 @@ Requires:   numpy, f2py
 %{?python_provide:%python_provide python2-scipy}
 # General provides of plain 'scipy' in F24
 Provides:       scipy = %{version}-%{release}
+Provides:       scipy%{?_isa} = %{version}-%{release}
 Obsoletes:      scipy <= 0.16.0
 %description -n python2-scipy
 Scipy is open-source software for mathematics, science, and
@@ -163,6 +164,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Sat Nov 21 2015 Kalev Lember <klember@redhat.com> - 0.16.1-6
+- Add provides to satisfy scipy%%{_isa} requires in other packages
+
 * Sun Nov 15 2015 Björn Esser <fedora@besser82.io> - 0.16.1-5
 - Revert "Discard results of testsuite on %%{arm} for now"
 
