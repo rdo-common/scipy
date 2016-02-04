@@ -11,7 +11,7 @@
 Summary:    Scientific Tools for Python
 Name:       scipy
 Version:    0.16.1
-Release:    6%{?dist}
+Release:    7%{?dist}
 
 Group:      Development/Libraries
 # BSD -- whole package except:
@@ -164,6 +164,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.16.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Sat Nov 21 2015 Kalev Lember <klember@redhat.com> - 0.16.1-6
 - Add provides to satisfy scipy%%{_isa} requires in other packages
 
