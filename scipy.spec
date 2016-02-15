@@ -10,17 +10,16 @@
 
 Summary:    Scientific Tools for Python
 Name:       scipy
-Version:    0.16.1
-Release:    7%{?dist}
+Version:    0.17.0
+Release:    1%{?dist}
 
 Group:      Development/Libraries
 # BSD -- whole package except:
 # Boost -- scipy/special/cephes/scipy_iv.c
 # Public Domain -- scipy/odr/__odrpack.c
 License:    BSD and Boost and Public Domain
-Url:        http://www.scipy.org
-Source0:    http://downloads.sourceforge.net/scipy/%{name}-%{version}%{?rcver}.tar.gz
-Patch0:     scipy-0.16.1-ctyptes-test.patch
+Url:        http://www.scipy.org/scipylib/index.html
+Source0:    https://pypi.python.org/packages/source/s/scipy/scipy-%{version}.tar.gz
 
 BuildRequires: numpy, python2-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -101,8 +100,6 @@ include_dirs = /usr/include/suitesparse
 umfpack_libs = umfpack
 EOF
 
-%patch0 -p1
-
 
 %build
 %if 0%{?with_python3}
@@ -164,6 +161,10 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Mon Feb 15 2016 Orion Poplawski <orion@cora.nwra.com> - 0.17.0-1
+- Update to 0.17.0
+- Drop ctypes patch applied upstream
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.16.1-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
