@@ -19,7 +19,7 @@ Group:      Development/Libraries
 # Public Domain -- scipy/odr/__odrpack.c
 License:    BSD and Boost and Public Domain
 Url:        http://www.scipy.org/scipylib/index.html
-Source0:    https://pypi.python.org/packages/source/s/scipy/scipy-%{version}.tar.gz
+Source0:    https://files.pythonhosted.org/packages/source/s/scipy/scipy-%{version}.tar.gz
 
 BuildRequires: numpy, python2-devel,f2py
 BuildRequires: fftw-devel, blas-devel, lapack-devel, suitesparse-devel
@@ -161,6 +161,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Tue May 31 2016 Nils Philippsen <nils@redhat.com>
+- fix source URL
+
 * Mon Feb 15 2016 Orion Poplawski <orion@cora.nwra.com> - 0.17.0-1
 - Update to 0.17.0
 - Drop ctypes patch applied upstream
