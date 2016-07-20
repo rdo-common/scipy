@@ -1,4 +1,4 @@
-%global with_python3 1
+%global with_python3 0
 %{?filter_setup:
 %filter_provides_in %{python2_sitearch}.*\.so$
 %filter_provides_in %{python3_sitearch}.*\.so$
@@ -47,7 +47,7 @@ leading scientists and engineers.
 
 %package -n python2-scipy
 Summary:    Scientific Tools for Python
-Requires:   numpy, f2py
+Requires:   numpy
 %{?python_provide:%python_provide python2-scipy}
 # General provides of plain 'scipy' in F24
 Provides:       scipy = %{version}-%{release}
@@ -70,7 +70,7 @@ leading scientists and engineers.
 Summary:    Scientific Tools for Python
 Group:      Development/Libraries
 License:    BSD and LGPLv2+
-Requires:   python3-numpy, python3-f2py
+Requires:   python3-numpy
 %{?python_provide:%python_provide python3-scipy}
 %description -n python3-scipy
 Scipy is open-source software for mathematics, science, and
