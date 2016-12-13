@@ -11,7 +11,7 @@
 Summary:    Scientific Tools for Python
 Name:       scipy
 Version:    0.18.0
-Release:    1%{?dist}
+Release:    2%{?dist}
 
 Group:      Development/Libraries
 # BSD -- whole package except:
@@ -161,6 +161,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Mon Dec 12 2016 Stratakis Charalampos <cstratak@redhat.com> - 0.18.0-2
+- Rebuild for Python 3.6
+
 * Tue Jul 26 2016 Than Ngo <than@redhat.com> - 0.18.0-1
 - 0.18.0
 - %%check: make non-fatal as temporary workaround for scipy build on arm 
