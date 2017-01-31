@@ -11,7 +11,7 @@
 Summary:    Scientific Tools for Python
 Name:       scipy
 Version:    0.18.0
-Release:    2%{?dist}
+Release:    3%{?dist}
 
 Group:      Development/Libraries
 # BSD -- whole package except:
@@ -161,6 +161,9 @@ PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} \
 %endif # with_python3
 
 %changelog
+* Tue Jan 31 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.18.0-3
+- Rebuild for libgfortran.so.3
+
 * Mon Dec 12 2016 Stratakis Charalampos <cstratak@redhat.com> - 0.18.0-2
 - Rebuild for Python 3.6
 
